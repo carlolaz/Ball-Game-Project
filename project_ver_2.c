@@ -184,12 +184,10 @@ void display(){
     }
     //place a sphere in the scene
     #ifdef TORUS
-        glColor3f(0.0,0.0,0.0);
         glutSolidTorus(object_radius/3,object_radius,nslices,nstacks);
     #endif // TORUS
 
     #ifdef SPHERE
-        glColor3f(0.0,0.0,0.0);
         glutSolidSphere(object_radius,nslices,nstacks);
     #endif
     glutSwapBuffers(); //swap front and back buffers
