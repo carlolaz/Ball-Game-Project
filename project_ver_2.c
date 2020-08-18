@@ -1,3 +1,4 @@
+
 #include <GL/freeglut.h>
 #include <math.h>
 #include "readBMP.h"
@@ -83,6 +84,31 @@ void init(){
     glFogf(GL_FOG_DENSITY, density); //set the density to the value above
     glHint(GL_FOG_HINT, GL_NICEST); //set the fog to look the nicest, may slow down on older cards
     */
+
+}
+
+void check(void){
+
+    //if the ball exceeds the edges, it will rebound and move in the opposite direction - the speed constantly gets added to the x and y coordinates of my object
+    //the object will then essentially move thanks to the glTranslate, if we comment that line, it will stop moving.
+    //if we multiply x_speed by a constant here, we get a funny exponential acceleration and the ball will rebound super fast
+    if(object_x > object_x_max){
+        object_x = object_x_max;
+        x_speed = -x_speed;
+    }
+    else if (object_x < object_x_min){
+        object_x = object_x_min;
+        x_speed = -x_speed;
+
+    }
+     if(object_y > object_y_max){
+        object_y = object_y_max;
+        y_speed = -y_speed;
+    }
+    else if (object_y < object_y_min){
+        object_y = object_y_min;
+        y_speed = -y_speed;
+    }
 
 }
 
@@ -184,10 +210,12 @@ void display(){
     }
     //place a sphere in the scene
     #ifdef TORUS
+        glColor3f(0.0,0.0,0.0);
         glutSolidTorus(object_radius/3,object_radius,nslices,nstacks);
     #endif // TORUS
 
     #ifdef SPHERE
+        glColor3f(0.0,0.0,0.0);
         glutSolidSphere(object_radius,nslices,nstacks);
     #endif
     glutSwapBuffers(); //swap front and back buffers
@@ -196,26 +224,8 @@ void display(){
     object_x += x_speed;
     object_y += y_speed;
 
-    //if the ball exceeds the edges, it will rebound and move in the opposite direction - the speed constantly gets added to the x and y coordinates of my object
-    //the object will then essentially move thanks to the glTranslate, if we comment that line, it will stop moving.
-    //if we multiply x_speed by a constant here, we get a funny exponential acceleration and the ball will rebound super fast
-    if(object_x > object_x_max){
-        object_x = object_x_max;
-        x_speed = -x_speed;
-    }
-    else if (object_x < object_x_min){
-        object_x = object_x_min;
-        x_speed = -x_speed;
-
-    }
-     if(object_y > object_y_max){
-        object_y = object_y_max;
-        y_speed = -y_speed;
-    }
-    else if (object_y < object_y_min){
-        object_y = object_y_min;
-        y_speed = -y_speed;
-    }
+    //check if the object touches the edges
+    check();
 
 }
 
