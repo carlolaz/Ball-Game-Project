@@ -71,7 +71,6 @@ void init(){
     // Load external textures.
     glClearColor(0.1,0.1,0.1, 1.0);
 
-    //I set it to GL_LINE for debugging; the assignment requires me to have a semi-transparent cube but I don't know how..
     #ifdef LINE
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     #endif // LINE
@@ -210,7 +209,6 @@ void display(){
             glTranslatef(object_x, object_y, object_z); //makes the ball move
             glutSolidSphere(object_radius,nslices,nstacks);
             //Animation
-            //Animation
             object_x += x_speed;
             object_y += y_speed;
             object_z += z_speed;
@@ -241,11 +239,7 @@ void display(){
             glDisable(GL_TEXTURE_GEN_R);
         glPopMatrix();
         glDepthMask(GL_TRUE);
-
         glutSwapBuffers();
-
-    glPopMatrix();
-
 
 }
 
