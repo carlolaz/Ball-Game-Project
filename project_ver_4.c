@@ -44,12 +44,18 @@ GLint angle = 45.0; //starting angle of view
 GLfloat material_AmbAndDif[] = {0.0, 0.1, 0.9, 1.0};
 GLfloat material_Spec[] = {0.5, 0.9, 0.3, 1.0};
 GLfloat material_Shininess[] = {20.0};
-// Global ambient light
-GLfloat globAmb[] = {1.0, 0.3, 0.5, 1.0};
-// Light property vectors.
-GLfloat lightAmb[] = {0.7, 0.0, 0.0, 1.0};
-GLfloat lightDif[] = {0.9, 0.0, 0.0, 1.0};
-GLfloat lightSpec[] = {0.0, 1.0, 0.0, 1.0};
+
+
+//Cube Material light properties
+GLfloat cube_material_AmbAndDif[] = {0.3, 0.4, 0.5, 1.0};
+GLfloat cube_material_Spec[] = {0.1, 0.7, 0.4, 1.0};
+GLfloat cube_material_Shininess[] = {5.0};
+//Global ambient light
+GLfloat globAmb[] = {1.0, 1.0, 0.5, 1.0};
+//Light property vectors.
+GLfloat lightAmb[] = {0.7, 0.3, 0.4, 1.0};
+GLfloat lightDif[] = {0.9, 0.5, 0.3, 1.0};
+GLfloat lightSpec[] = {0.5, 1.0, 0.5, 1.0};
 GLfloat red[] = {1.0,0.0,0.0,1.0};
 GLfloat blue[] = {0.0,0.0,1.0,1.0};
 GLfloat green[] = {0.0,1.0,0.0,1.0};
@@ -234,6 +240,10 @@ void display(){
 
             glColor4f(1.0, 0.0, 0.0, 0.3);
             glutSolidCube(1.0);
+            //Material light properties
+            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, cube_material_AmbAndDif);
+            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, cube_material_Spec);
+            glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, cube_material_Shininess);
             glDisable(GL_TEXTURE_GEN_S);
             glDisable(GL_TEXTURE_GEN_T);
             glDisable(GL_TEXTURE_GEN_R);
