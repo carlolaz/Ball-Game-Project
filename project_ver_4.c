@@ -14,8 +14,6 @@
 #define FILL
 //#define LINE
 
-// Clipping area
-GLdouble clip_area_x_left, clip_area_x_right, clip_area_y_bottom, clip_area_y_top, clip_area_z_min, clip_area_z_max;
 // Object Values
 GLfloat object_x = 0.0f; //object center x coordinate
 GLfloat object_y = 0.0f;  //object center y coordinate
