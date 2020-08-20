@@ -208,48 +208,47 @@ void display(){
     init_lighting();
 
     glRotatef(angle, 0.0, 1.0, 0.0);
+
     glPushMatrix();
+    //SPHERE
+    glTranslatef(object_x, object_y, object_z); //makes the ball move
+    glutSolidSphere(object_radius,nslices,nstacks);
+    //Animation
+    object_x += x_speed;
+    object_y += y_speed;
+    object_z += z_speed;
 
-        glPushMatrix();
-            //SPHERE
-            glTranslatef(object_x, object_y, object_z); //makes the ball move
-            glutSolidSphere(object_radius,nslices,nstacks);
-            //Animation
-            object_x += x_speed;
-            object_y += y_speed;
-            object_z += z_speed;
+    //Check if the object touches the edges
+    check();
+    //swap front and back buffers
+    glPopMatrix();
 
-            //Check if the object touches the edges
-            check();
-            //swap front and back buffers
-        glPopMatrix();
+    glDepthMask(GL_FALSE);
+    glRotatef(30.0, 0.0, 1.0, 0.0);
+    glRotatef(25.0, 1.0, 0.0, 0.0);
 
-        glDepthMask(GL_FALSE);
-        glRotatef(30.0, 0.0, 1.0, 0.0);
-        glRotatef(25.0, 1.0, 0.0, 0.0);
+    glPushMatrix();
+    LoadExternalTextures();
+     glEnable(GL_TEXTURE_CUBE_MAP);
+    //Activate texture object.
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    //Enable automatic generation of s,t and r coordinates
+    glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+    glEnable(GL_TEXTURE_GEN_R);
 
-        glPushMatrix();
-            LoadExternalTextures();
-             glEnable(GL_TEXTURE_CUBE_MAP);
-            //Activate texture object.
-            glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
-            //Enable automatic generation of s,t and r coordinates
-            glEnable(GL_TEXTURE_GEN_S);
-            glEnable(GL_TEXTURE_GEN_T);
-            glEnable(GL_TEXTURE_GEN_R);
-
-            glColor4f(1.0, 0.0, 0.0, 0.3);
-            glutSolidCube(1.0);
-            //Material light properties
-            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, cube_material_AmbAndDif);
-            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, cube_material_Spec);
-            glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, cube_material_Shininess);
-            glDisable(GL_TEXTURE_GEN_S);
-            glDisable(GL_TEXTURE_GEN_T);
-            glDisable(GL_TEXTURE_GEN_R);
-        glPopMatrix();
-        glDepthMask(GL_TRUE);
-        glutSwapBuffers();
+    glColor4f(1.0, 0.0, 0.0, 0.3);
+    glutSolidCube(1.0);
+    //Material light properties
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, cube_material_AmbAndDif);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, cube_material_Spec);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, cube_material_Shininess);
+    glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+    glDisable(GL_TEXTURE_GEN_R);
+    glPopMatrix();
+    glDepthMask(GL_TRUE);
+    glutSwapBuffers();
 
 }
 
@@ -417,7 +416,8 @@ int main(int argc, char **argv){
     glutDisplayFunc(display); //set display function
     glutMainLoop(); //initialize glut main loop
 
-    //There's a big problem: the program crashes after 11 ish seconds..
+    //Issue: the program crashes after 12 ish seconds..
 
     return 0;
 }
+
