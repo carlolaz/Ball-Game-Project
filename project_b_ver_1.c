@@ -3,26 +3,26 @@
 #include <GL/freeglut.h>
 #include <math.h>
 #include <stdio.h>
-
 #define NFACES 6
 #define NVERTICES 4
 #define nslices 100
 #define nstacks 100
 #define object_radius 0.15f
 
-//clipping area
+
 //Object Values
 GLfloat object_x = 0.0f; //object center x coordinate
 GLfloat object_y = 0.0f;  //object center y coordinate
 GLfloat object_z = 0.0f; //object z coordinates
 
-GLfloat x_speed = 0.02f;    //speed in x axis
+
+GLfloat x_speed = 0.05f;    //speed in x axis
 GLfloat y_speed = 0.007f;   //speed in y axis
-GLfloat z_speed = 0.04f; //speed in z axis
+GLfloat z_speed = 0.03f; //speed in z axis
 //Refresh
 GLfloat refresh_ms = 30; //refresh period in milliseconds
-GLint colour = 3;
 GLfloat angle = 10;
+
 
 GLfloat object_x_min = -0.5 + object_radius; //if we remove the object_radius factor here, the object will bounce only when the center hits the wall
 GLfloat object_x_max = 0.5 - object_radius;
@@ -31,10 +31,12 @@ GLfloat object_y_max = 0.5 - object_radius;
 GLfloat object_z_min = -0.5 + object_radius;
 GLfloat object_z_max = 0.5 - object_radius;
 
+
 //Material light properties
 GLfloat material_AmbAndDif[] = {0.0, 0.1, 0.9, 1.0};
 GLfloat material_Spec[] = {0.5, 0.9, 0.3, 1.0};
 GLfloat material_Shininess[] = {2.0};
+
 
 //Cube Material light properties
 GLfloat cube_material_AmbAndDif[] = {0.3, 0.4, 0.5, 1.0};
@@ -78,7 +80,7 @@ GLfloat vertexArray[NFACES*NVERTICES][3] = {
 
 
 };
-//texture coordinates
+
 
 GLfloat colorArray[NFACES*NVERTICES][3] = {
     {1.0, 0.0, 0.0},
@@ -99,6 +101,7 @@ GLfloat colorArray[NFACES*NVERTICES][3] = {
     {1.0, 0.0, 0.0},
 
 };
+
 
 void init_lighting(){
 
@@ -127,6 +130,7 @@ void init_lighting(){
 
 }
 
+
 //initialization routine
 void init(){
 
@@ -139,6 +143,7 @@ void init(){
     glDepthFunc(GL_LESS);
 
 }
+
 
 void check(void){
 
@@ -173,6 +178,7 @@ void check(void){
     }
 
 }
+
 
 //Callback Handler
 void display(){
@@ -249,6 +255,7 @@ void timer_callback(int v){
 
 }
 
+
 void keyInput(unsigned char key, int x, int y)
 {
     int index=0;
@@ -295,9 +302,11 @@ void keyInput(unsigned char key, int x, int y)
 
 }
 
+
 void top_menu(int id){
     if(id==1) exit(0);
 }
+
 
 void color_menu(int id){
 
@@ -363,6 +372,7 @@ void color_menu(int id){
     };
 }
 
+
 void makeMenu(void){
 
     int sub_menu;
@@ -385,6 +395,7 @@ void makeMenu(void){
 
 }
 
+
 //Main function
 int main(int argc, char **argv){
 
@@ -398,7 +409,7 @@ int main(int argc, char **argv){
     glutInitWindowSize(window_width, window_height);
     glutInitWindowPosition(window_pos_x, window_pos_y);
     glutCreateWindow("OpenGL Window");
-    printf("Press ESC to quit\n");
+    printf("Press ESC to quit.\n");
     printf("Press 1 and 2 to increase/decrease the material light specular component.\n");
     printf("Press 3 and 4 to increase/decrease the material shininess.\n");
     printf("Press 5 and 6 to increase/decrease the material light ambient/diffuse component.\n");
@@ -411,3 +422,4 @@ int main(int argc, char **argv){
 
     return 0;
 }
+
