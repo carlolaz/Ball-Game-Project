@@ -144,7 +144,7 @@ void check(void){
         z_speed = -z_speed;
     }
 
-    glutPostRedisplay();
+    //glutPostRedisplay();
 
 }
 
@@ -405,6 +405,13 @@ void color_menu(int id){
     };
 }
 
+void timer_callback(int v){
+
+    glutPostRedisplay();
+    glutTimerFunc(refresh_ms, timer_callback, 0); // glutTimerFunc registers a timer callback to be triggered in a specified number of milliseconds.
+
+}
+
 void makeMenu(void){
 
     int sub_menu;
@@ -448,6 +455,7 @@ int main(int argc, char **argv){
     printf("Press 5 and 6 to increase/decrease the materials light ambient/diffuse component.\n");
     printf("Press + and - to transform the scene\n");
     glutKeyboardFunc(keyInput);
+    glutTimerFunc(0, timer_callback, 0); //  glutTimerFunc registers a timer callback to be triggered in a specified number of milliseconds.
     makeMenu();
     init(); //initiation function
     glutDisplayFunc(display); //set display function
@@ -455,3 +463,4 @@ int main(int argc, char **argv){
 
     return 0;
 }
+
