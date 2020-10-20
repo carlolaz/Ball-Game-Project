@@ -116,8 +116,7 @@ void init_lighting(){
 void check(void){
 
     //If the ball exceeds the edges, it will rebound and move in the opposite direction - the speed constantly gets added to the x and y coordinates of my object
-    //The object will then essentially move thanks to the glTranslate, if we comment that line, it will stop moving.
-    //If we multiply x_speed by a constant here, we get a funny exponential acceleration and the ball will rebound super fast
+    //The object will move thanks to glTranslate
     if(object_x > object_x_max){
         object_x = object_x_max;
         x_speed = -x_speed;
