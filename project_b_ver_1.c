@@ -1,4 +1,3 @@
-
 #include <glew.h>
 #include <GL/freeglut.h>
 #include <math.h>
@@ -9,12 +8,10 @@
 #define nstacks 100
 #define object_radius 0.15f
 
-
 //Object Values
 GLfloat object_x = 0.0f; //object center x coordinate
 GLfloat object_y = 0.0f;  //object center y coordinate
 GLfloat object_z = 0.0f; //object z coordinates
-
 
 GLfloat x_speed = 0.05f;    //speed in x axis
 GLfloat y_speed = 0.007f;   //speed in y axis
@@ -23,7 +20,6 @@ GLfloat z_speed = 0.03f; //speed in z axis
 GLfloat refresh_ms = 30; //refresh period in milliseconds
 GLfloat angle = 10;
 
-
 GLfloat object_x_min = -0.5 + object_radius; //if we remove the object_radius factor here, the object will bounce only when the center hits the wall
 GLfloat object_x_max = 0.5 - object_radius;
 GLfloat object_y_min = -0.5 + object_radius;
@@ -31,12 +27,10 @@ GLfloat object_y_max = 0.5 - object_radius;
 GLfloat object_z_min = -0.5 + object_radius;
 GLfloat object_z_max = 0.5 - object_radius;
 
-
 //Material light properties
 GLfloat material_AmbAndDif[] = {0.0, 0.1, 0.9, 1.0};
 GLfloat material_Spec[] = {0.5, 0.9, 0.3, 1.0};
 GLfloat material_Shininess[] = {2.0};
-
 
 //Cube Material light properties
 GLfloat cube_material_AmbAndDif[] = {0.3, 0.4, 0.5, 1.0};
@@ -51,7 +45,6 @@ GLfloat lightSpec[] = {0.0, 1.0, 0.0, 1.0};
 GLfloat red[] = {1.0,0.0,0.0,1.0};
 GLfloat blue[] = {0.0,0.0,1.0,1.0};
 GLfloat green[] = {0.0,1.0,0.0,1.0};
-
 
 GLfloat vertexArray[NFACES*NVERTICES][3] = {
     // first face - v0,v1,v3,v2
@@ -81,7 +74,6 @@ GLfloat vertexArray[NFACES*NVERTICES][3] = {
 
 };
 
-
 GLfloat colorArray[NFACES*NVERTICES][3] = {
     {1.0, 0.0, 0.0},
     {1.0, 0.0, 0.0},
@@ -101,7 +93,6 @@ GLfloat colorArray[NFACES*NVERTICES][3] = {
     {1.0, 0.0, 0.0},
 
 };
-
 
 void init_lighting(){
 
@@ -130,7 +121,6 @@ void init_lighting(){
 
 }
 
-
 //initialization routine
 void init(){
 
@@ -143,7 +133,6 @@ void init(){
     glDepthFunc(GL_LESS);
 
 }
-
 
 void check(void){
 
@@ -177,7 +166,6 @@ void check(void){
     }
 
 }
-
 
 //Callback Handler
 void display(){
@@ -246,14 +234,12 @@ void display(){
 
 }
 
-
 void timer_callback(int v){
 
     glutPostRedisplay();
     glutTimerFunc(refresh_ms, timer_callback, 0); // glutTimerFunc registers a timer callback to be triggered in a specified number of milliseconds.
 
 }
-
 
 void keyInput(unsigned char key, int x, int y)
 {
@@ -300,7 +286,6 @@ void keyInput(unsigned char key, int x, int y)
     }
 
 }
-
 
 void top_menu(int id){
     if(id==1) exit(0);
@@ -371,7 +356,6 @@ void color_menu(int id){
     };
 }
 
-
 void makeMenu(void){
 
     int sub_menu;
@@ -393,7 +377,6 @@ void makeMenu(void){
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 }
-
 
 //Main function
 int main(int argc, char **argv){
@@ -421,4 +404,3 @@ int main(int argc, char **argv){
 
     return 0;
 }
-
