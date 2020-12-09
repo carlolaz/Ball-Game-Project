@@ -137,7 +137,7 @@ void init(){
 void check(void){
 
     //if the ball exceeds the edges, it will rebound and move in the opposite direction - the speed constantly gets added to the x and y coordinates of my object
-    //the object will then essentially move thanks to the glTranslate, if we comment that line, it will stop moving.
+    //the object will then essentially move thanks to the glTranslate; if we comment that line, it will stop moving.
     if(object_x > object_x_max){
         object_x = object_x_max;
         x_speed = -x_speed;
