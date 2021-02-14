@@ -9,14 +9,17 @@
 #define nstacks 100
 #define object_radius 0.13f
 
+
 //Uncomment only ONE of the following:
 #define FILL
 //#define LINE
+
 
 // Object Values
 GLfloat object_x = 0.0f; //object center x coordinate
 GLfloat object_y = 0.0f;  //object center y coordinate
 GLfloat object_z = 0.0f; //object z coordinates
+
 
 // These will serve as the edges
 GLfloat object_x_max = 0.5 - object_radius;
@@ -26,6 +29,7 @@ GLfloat object_y_min = -0.5 + object_radius;
 GLfloat object_z_max = 0.5 - object_radius;
 GLfloat object_z_min = -0.5 + object_radius;
 
+
 GLfloat x_speed =  0.07f; //speed in x axis
 GLfloat y_speed = 0.05f; //speed in y axis
 GLfloat z_speed = 0.03f; //speed in z axis
@@ -34,10 +38,12 @@ GLfloat refresh_ms = 30; //refresh period in milliseconds
 GLint colour = 3;
 GLint angle = 45.0; //starting angle of view
 
+
 //Material light properties
 GLfloat material_AmbAndDif[] = {0.0, 0.1, 0.9, 1.0};
 GLfloat material_Spec[] = {0.5, 0.9, 0.3, 1.0};
 GLfloat material_Shininess[] = {1.0};
+
 
 //Cube Material light properties
 GLfloat cube_material_AmbAndDif[] = {0.3, 0.4, 0.5, 1.0};
@@ -64,8 +70,6 @@ GLenum facePos[NFACES] = {GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NE
 static GLuint textureID;
 
 
-
-
 // Initialization routine
 void init(){
 
@@ -85,6 +89,7 @@ void init(){
     glDepthFunc(GL_LESS);
 
 }
+
 
 void init_lighting(){
 
@@ -112,6 +117,7 @@ void init_lighting(){
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, material_Shininess);
 
 }
+
 
 void check(void){
 
@@ -147,10 +153,10 @@ void check(void){
 
 }
 
+
 void LoadExternalTextures(){
 
     int index;
-
 
     //initialize texture ID
     glGenTextures(1, &textureID);
@@ -177,7 +183,6 @@ void LoadExternalTextures(){
          // generate textures
         glTexImage2D(facePos[index], 0, GL_RGBA, images[index]->sizeX, images[index]->sizeY, 0, GL_RGBA, GL_UNSIGNED_BYTE, images[index]->data);
     }
-
 
     //Set parameters to generate s, t, and r texture mapping coordinates
     glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
@@ -213,6 +218,7 @@ void LoadExternalTextures(){
     */
 
 }
+
 
 //Callback Handler
 void display(){
@@ -287,6 +293,7 @@ void display(){
 
 }
 
+
 void keyInput(unsigned char key, int x, int y)
 {
     int index=0;
@@ -336,9 +343,11 @@ void keyInput(unsigned char key, int x, int y)
 
 }
 
+
 void top_menu(int id){
     if(id==1) exit(0);
 }
+
 
 void color_menu(int id){
 
@@ -404,12 +413,14 @@ void color_menu(int id){
     };
 }
 
+
 void timer_callback(int v){
 
     glutPostRedisplay();
     glutTimerFunc(refresh_ms, timer_callback, 0); // glutTimerFunc registers a timer callback to be triggered in a specified number of milliseconds.
 
 }
+
 
 void makeMenu(void){
 
@@ -432,6 +443,7 @@ void makeMenu(void){
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 }
+
 
 // Main function
 int main(int argc, char **argv){
@@ -461,5 +473,6 @@ int main(int argc, char **argv){
     glutMainLoop(); //initialize glut main loop
 
     return 0;
+    
 }
 
