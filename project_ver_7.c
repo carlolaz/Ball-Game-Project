@@ -76,7 +76,6 @@ void init(){
     // Load external textures.
     glClearColor(0.1,0.1,0.1, 1.0);
 
-
     #ifdef LINE
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     #endif // LINE
@@ -190,33 +189,7 @@ void LoadExternalTextures(){
     glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND); //GL_BLEND AND GL_MODULATE seem to be work quite well
-    /*
-    // Define how RGB components are computed
-    // Interpolate RGB with RGB
-    glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_INTERPOLATE);
-    glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_PREVIOUS);
-    glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_TEXTURE);
-    // GL_CONSTANT refers to the call we make with
-    // glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, envColor)
-    glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE2_RGB, GL_CONSTANT);
-    glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
-    glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
-    glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND2_RGB, GL_SRC_COLOR);
-
-    // Define how Alpha component is computed
-    // Interpolate ALPHA with ALPHA
-    glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_INTERPOLATE);
-    glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
-    glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE1_ALPHA, GL_TEXTURE);
-    // GL_CONSTANT refers to the call we make with
-    // glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, envColor)
-    glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE2_ALPHA, GL_CONSTANT);
-    glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
-    glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND1_ALPHA, GL_SRC_ALPHA);
-    glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND2_ALPHA, GL_SRC_ALPHA);
-    //Specify how texture values combine with current surface color values.
-    */
-
+  
 }
 
 
@@ -234,6 +207,7 @@ void display(){
     glRotatef(angle, 0.0, 1.0, 0.0);
 
         glPushMatrix();
+    
             //SPHERE
             glTranslatef(object_x, object_y, object_z); //makes the ball move
             glutSolidSphere(object_radius,nslices,nstacks);
@@ -245,6 +219,7 @@ void display(){
             //Check if the object touches the edges
             check();
             //swap front and back buffers
+    
         glPopMatrix();
 
         glDepthMask(GL_FALSE);
@@ -252,6 +227,7 @@ void display(){
         glRotatef(25.0, 1.0, 0.0, 0.0);
 
         glPushMatrix();
+    
             LoadExternalTextures();
             glEnable(GL_TEXTURE_CUBE_MAP);
             //Activate texture object.
@@ -285,10 +261,9 @@ void display(){
                         free(images[index]->data);
                     }
             }
+    
         glPopMatrix();
-
         glDepthMask(GL_TRUE);
-
     glutSwapBuffers();
 
 }
@@ -448,8 +423,6 @@ void makeMenu(void){
 // Main function
 int main(int argc, char **argv){
 
-
-    //gladLoadGLLoader((GLADloadproc)GetProcAddress(CONTEXT,));
     int window_width = 800;
     int window_height = 800;
     int window_pos_x = 0;
