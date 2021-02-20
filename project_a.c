@@ -10,18 +10,18 @@
 #define object_radius 0.13f
 
 
-//Uncomment only ONE of the following:
+/* Uncomment only ONE of the following */
 #define FILL
-//#define LINE
+//#define LINE */
 
-
-// Object Values
-GLfloat object_x = 0.0f; //object center x coordinate
-GLfloat object_y = 0.0f;  //object center y coordinate
-GLfloat object_z = 0.0f; //object z coordinates
-
-
-// These will serve as the edges
+ 
+/* Object Values */
+GLfloat object_x = 0.0f; //object center x coordinate */
+GLfloat object_y = 0.0f;  //object center y coordinate  */
+GLfloat object_z = 0.0f; //object z coordinates */
+ 
+ 
+/* These will serve as the edges */
 GLfloat object_x_max = 0.5 - object_radius;
 GLfloat object_x_min = -0.5 + object_radius;
 GLfloat object_y_max = 0.5 - object_radius;
@@ -30,28 +30,28 @@ GLfloat object_z_max = 0.5 - object_radius;
 GLfloat object_z_min = -0.5 + object_radius;
 
 
-GLfloat x_speed =  0.07f; //speed in x axis
-GLfloat y_speed = 0.05f; //speed in y axis
-GLfloat z_speed = 0.03f; //speed in z axis
-// Refresh
-GLfloat refresh_ms = 30; //refresh period in milliseconds
+GLfloat x_speed =  0.07f; //speed in x axis */
+GLfloat y_speed = 0.05f; //speed in y axis */
+GLfloat z_speed = 0.03f; //speed in z axis */ 
+/* Refresh
+GLfloat refresh_ms = 30; //refresh period in milliseconds */
 GLint colour = 3;
-GLint angle = 45.0; //starting angle of view
+GLint angle = 45.0; //starting angle of view */
 
 
-//Material light properties
+/* Material light properties */
 GLfloat material_AmbAndDif[] = {0.0, 0.1, 0.9, 1.0};
 GLfloat material_Spec[] = {0.5, 0.9, 0.3, 1.0};
 GLfloat material_Shininess[] = {1.0};
 
 
-//Cube Material light properties
+/* Cube Material light properties */
 GLfloat cube_material_AmbAndDif[] = {0.3, 0.4, 0.5, 1.0};
 GLfloat cube_material_Spec[] = {0.1, 0.7, 0.4, 1.0};
 GLfloat cube_material_Shininess[] = {5.0};
-//Global ambient light
+/* Global ambient light */
 GLfloat globAmb[] = {1.0, 1.0, 0.5, 1.0};
-//Light property vectors.
+/* Light property vectors. */
 GLfloat lightAmb[] = {0.7, 0.3, 0.4, 1.0};
 GLfloat lightDif[] = {0.9, 0.5, 0.3, 1.0};
 GLfloat lightSpec[] = {0.5, 1.0, 0.5, 1.0};
@@ -60,31 +60,31 @@ GLfloat blue[] = {0.0,0.0,1.0,1.0};
 GLfloat green[] = {0.0,1.0,0.0,1.0};
 
 
-// Local storage for bmp image data.
+/* Local storage for bmp image data. */
 struct BitMapFile *images[NFACES];
-//Array containing the bpm images
+/* Array containing the bpm images */
 char *fileName[NFACES] = {"right.bmp", "left.bmp", "top.bmp", "bottom.bmp", "front.bmp", "back.bmp"};
-//Parameters to bind the textures
+/* Parameters to bind the textures */
 GLenum facePos[NFACES] = {GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z};
-//Array of texture index
+/* Array of texture index */
 static GLuint textureID;
 
 
-// Initialization routine
+/* Initialization routine */
 void init(){
 
-    // Load external textures.
+    /* Load external textures. */
     glClearColor(0.1,0.1,0.1, 1.0);
 
     #ifdef LINE
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    #endif // LINE
+    #endif /* LINE */
     #ifdef FILL
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    #endif // FILL
+    #endif /* FILL */
     LoadExternalTextures();
 
-    glEnable(GL_DEPTH_TEST); //Enable Depth Test
+    glEnable(GL_DEPTH_TEST); /* Enable Depth Test */
     glDepthFunc(GL_LESS);
 
 }
@@ -92,25 +92,25 @@ void init(){
 
 void init_lighting(){
 
-    // Turn on OpenGL Lighting
+    /*  Turn on OpenGL Lighting */
     glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDif);
     glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpec);
-    // Global ambient light.
+    /*  Global ambient light. */
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globAmb);
-    // Enable two-sided lighting.
+    /*  Enable two-sided lighting. */
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
-    // Enable local viewpoint.
+    /*  Enable local viewpoint. */
     glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
     glShadeModel(GL_SMOOTH);
     glEnable(GL_LIGHTING);
-    //Light Position
+    /* Light Position */
     GLfloat LightPosition[] = {object_x,object_y,object_z};
     GLfloat Light_Center[] = {0.0, 0.0, 0};
     glLightfv(GL_LIGHT0, GL_POSITION, Light_Center);
-    //let there be light
+    /* let there be light */
     glEnable(GL_LIGHT0);
-    //Material light properties
+    /* Material light properties */
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, material_AmbAndDif);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_Spec);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, material_Shininess);
@@ -120,8 +120,8 @@ void init_lighting(){
 
 void check(void){
 
-    //If the ball exceeds the edges, it will rebound and move in the opposite direction - the speed constantly gets added to the x and y coordinates of my object
-    //The object will move thanks to glTranslate
+    /* If the ball exceeds the edges, it will rebound and move in the opposite direction - the speed constantly gets added to the x and y coordinates of my object */
+    /* The object will move thanks to glTranslate */
     if(object_x > object_x_max){
         object_x = object_x_max;
         x_speed = -x_speed;
@@ -148,7 +148,7 @@ void check(void){
         z_speed = -z_speed;
     }
 
-    //glutPostRedisplay();
+    /* glutPostRedisplay(); */
 
 }
 
@@ -157,7 +157,7 @@ void LoadExternalTextures(){
 
     int index;
 
-    //initialize texture ID
+    /* initialize texture ID */
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
     glEnable(GL_TEXTURE_2D);
@@ -169,7 +169,7 @@ void LoadExternalTextures(){
 
     for(index=0; index<NFACES; index++)
     {
-        // Load external textures
+        /*  Load external textures */
         images[index] = readBMP(fileName[index]);
         if(images[index] == NULL)
         {
@@ -179,46 +179,46 @@ void LoadExternalTextures(){
         {
             printf("Loaded image %s - %d x %d pixels \n", fileName[index], images[index]->sizeX, images[index]->sizeY);
         }
-         // generate textures
+        // generate textures */
         glTexImage2D(facePos[index], 0, GL_RGBA, images[index]->sizeX, images[index]->sizeY, 0, GL_RGBA, GL_UNSIGNED_BYTE, images[index]->data);
     }
 
-    //Set parameters to generate s, t, and r texture mapping coordinates
+    /* Set parameters to generate s, t, and r texture mapping coordinates */
     glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
     glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
     glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND); //GL_BLEND AND GL_MODULATE seem to be work quite well
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND); //GL_BLEND AND GL_MODULATE seem to be work quite well */
   
 }
 
 
-//Callback Handler
+/* Callback Handler */
 void display(){
 
     int index=0;
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Clear Color buffer bit and depth buffer bit
-    //Initialize model view transforms
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Clear Color buffer bit and depth buffer bit */
+    /* Initialize model view transforms */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    //Light
+    /* Light */
     init_lighting();
 
     glRotatef(angle, 0.0, 1.0, 0.0);
 
         glPushMatrix();
     
-            //SPHERE
-            glTranslatef(object_x, object_y, object_z); //makes the ball move
+            /* SPHERE */
+            glTranslatef(object_x, object_y, object_z); //makes the ball move */
             glutSolidSphere(object_radius,nslices,nstacks);
-            //Animation
+            /* Animation */
             object_x += x_speed;
             object_y += y_speed;
             object_z += z_speed;
 
-            //Check if the object touches the edges
+            /* Check if the object touches the edges */
             check();
-            //swap front and back buffers
+            /* swap front and back buffers */
     
         glPopMatrix();
 
@@ -230,21 +230,21 @@ void display(){
     
             LoadExternalTextures();
             glEnable(GL_TEXTURE_CUBE_MAP);
-            //Activate texture object.
+            /* Activate texture object. */
             glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
-            //Enable automatic generation of s,t and r coordinates
+            /* Enable automatic generation of s,t and r coordinates */
             glEnable(GL_TEXTURE_GEN_S);
             glEnable(GL_TEXTURE_GEN_T);
             glEnable(GL_TEXTURE_GEN_R);
 
-            //glBlendFunc defines the operation of blending for all draw buffers when it is enabled
-            //Pixels can be drawn using a function that blends the incoming (source) RGBA values with the RGBA values that are already in the frame buffer (the destination values).
-            //Blending is initially disabled. Use glEnable and glDisable with argument GL_BLEND to enable and disable blending.
+            /* glBlendFunc defines the operation of blending for all draw buffers when it is enabled */
+            /* Pixels can be drawn using a function that blends the incoming (source) RGBA values with the RGBA values that are already in the frame buffer (the destination values). */
+            /* Blending is initially disabled. Use glEnable and glDisable with argument GL_BLEND to enable and disable blending. */
             glEnable( GL_BLEND );
-            glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR ); //( 1 1 1 1 )
+            glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR ); 
             glColor4f(1.0, 0.0, 0.0, 0.5);
             glutSolidCube(1.0);
-            //Material light properties
+            /* Material light properties */
 
             glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, cube_material_AmbAndDif);
             glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, cube_material_Spec);
@@ -257,7 +257,7 @@ void display(){
 
             for(index=0; index<NFACES; index++) {
                     if (images[index] != NULL) {
-                        // freee allocated memory
+                        /* free allocated memory */
                         free(images[index]->data);
                     }
             }
@@ -274,7 +274,7 @@ void keyInput(unsigned char key, int x, int y)
     int index=0;
     switch(key) {
         case 27:
-            // ESC
+            /*  ESC */
 
             exit(0);
             break;
@@ -312,7 +312,7 @@ void keyInput(unsigned char key, int x, int y)
             break;
 
         default:
-            // Do nothing
+            /*  Do nothing */
             break;
     }
 
@@ -320,7 +320,7 @@ void keyInput(unsigned char key, int x, int y)
 
 
 void top_menu(int id){
-    if(id==1) exit(0);
+    if(id == 1) exit(0);
 }
 
 
@@ -329,57 +329,57 @@ void color_menu(int id){
     int ind = 0;
     switch(id){
         case 1:
-            //Change colour of ambient light to red
+            /* Change colour of ambient light to red */
             for(ind = 0; ind < 4; ind++)
                 lightAmb[ind] = red[ind];
             break;
 
         case 2:
-            //Change colour of ambient light to green
+            /* Change colour of ambient light to green */
             for(ind = 0; ind < 4; ind++)
                 lightAmb[ind] = green[ind];
             break;
 
         case 3:
-             //Change colour of ambient light to blue
+             /* Change colour of ambient light to blue */
             for(ind = 0; ind < 4; ind++)
                 lightAmb[ind] = blue[ind];
             break;
 
         case 4:
-            //Change colour of diffuse light to red
+            /* Change colour of diffuse light to red */
             for(ind = 0; ind < 4; ind++)
                 lightDif[ind] = red[ind];
             break;
 
         case 5:
-            //Change colour of diffuse light to green
+            /* Change colour of diffuse light to green */
             for(ind = 0; ind < 4; ind++)
                 lightDif[ind] = green[ind];
             break;
 
         case 6:
-            //Change colour of diffuse light to blue
+            /* Change colour of diffuse light to blue */
             for(ind = 0; ind < 4; ind++);{
                 lightDif[ind] = blue[ind];
             }
             break;
 
         case 7:
-            //Change colour of specular light to red
-            for(ind = 0; ind < 4; ind++)
+            /* Change colour of specular light to red */
+            for(ind = 0; ind < 4; ind++) 
                 lightSpec[ind] = red[ind];
             break;
 
         case 8:
-            //Change colour of specular light to green
+            /* Change colour of specular light to green */
             for(ind = 0; ind < 4; ind++)
                 lightSpec[ind] = green[ind];
             break;
 
         case 9:
-            //Change colour of specular light to blue
-            for(ind = 0; ind < 4; ind++)
+            /* Change colour of specular light to blue */
+            for(ind = 0; ind < 4; ind++) 
                 lightSpec[ind] = blue[ind];
             break;
 
@@ -392,7 +392,7 @@ void color_menu(int id){
 void timer_callback(int v){
 
     glutPostRedisplay();
-    glutTimerFunc(refresh_ms, timer_callback, 0); // glutTimerFunc registers a timer callback to be triggered in a specified number of milliseconds.
+    glutTimerFunc(refresh_ms, timer_callback, 0); /* glutTimerFunc registers a timer callback to be triggered in a specified number of milliseconds. */
 
 }
 
@@ -420,7 +420,7 @@ void makeMenu(void){
 }
 
 
-// Main function
+/* Main function */
 int main(int argc, char **argv){
 
     int window_width = 800;
@@ -428,8 +428,8 @@ int main(int argc, char **argv){
     int window_pos_x = 0;
     int window_pos_y = 0;
 
-    glutInit(&argc, argv); //pass potential arguments to glutInit
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); //Enable Double buffering
+    glutInit(&argc, argv); /* pass potential arguments to glutInit */
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); /* Enable Double buffering */
     glutInitWindowSize(window_width, window_height);
     glutInitWindowPosition(window_pos_x, window_pos_y);
     glutCreateWindow("OpenGL Window");
@@ -439,11 +439,11 @@ int main(int argc, char **argv){
     printf("Press 5 and 6 to increase/decrease the materials light ambient/diffuse component.\n");
     printf("Press + and - to transform the scene\n");
     glutKeyboardFunc(keyInput);
-    glutTimerFunc(0, timer_callback, 0); //  glutTimerFunc registers a timer callback to be triggered in a specified number of milliseconds.
+    glutTimerFunc(0, timer_callback, 0); /* glutTimerFunc registers a timer callback to be triggered in a specified number of milliseconds. */
     makeMenu();
-    init(); //initiation function
-    glutDisplayFunc(display); //set display function
-    glutMainLoop(); //initialize glut main loop
+    init(); /* initiation function */
+    glutDisplayFunc(display); /* set display function */
+    glutMainLoop(); /* initialize glut main loop */
 
     return 0;
     
