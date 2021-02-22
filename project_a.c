@@ -179,7 +179,7 @@ void LoadExternalTextures(){
         {
             printf("Loaded image %s - %d x %d pixels \n", fileName[index], images[index]->sizeX, images[index]->sizeY);
         }
-        // generate textures */
+        /* generate textures */
         glTexImage2D(facePos[index], 0, GL_RGBA, images[index]->sizeX, images[index]->sizeY, 0, GL_RGBA, GL_UNSIGNED_BYTE, images[index]->data);
     }
 
