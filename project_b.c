@@ -125,7 +125,7 @@ void init_lighting(){
 void init(){
 
     /* Load external textures. */
-    glClearColor(0.1,0.1,0.1, 1.0);
+    glClearColor(0.1, 0.1, 0.1, 1.0);
     /* glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); */
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
@@ -250,11 +250,11 @@ void keyInput(unsigned char key, int x, int y)
             exit(0);
             break;
         case '1':
-            for(index=0; index < 4; index++)
+            for(index=0; index < 3; index++)
                 material_Spec[index]+=0.01;
             break;
         case '2':
-            for(index=0; index < 4; index++)
+            for(index=0; index < 3; index++)
                 material_Spec[index]-=0.01;;
             break;
         case '3':
@@ -264,11 +264,11 @@ void keyInput(unsigned char key, int x, int y)
             material_Shininess[1]-=0.1f;
             break;
         case '5':
-            for(index=0; index < 4; index++)
+            for(index=0; index < 3; index++)
                 material_AmbAndDif[index]+=0.01;
             break;
         case '6':
-            for(index=0; index < 4; index++)
+            for(index=0; index < 3; index++)
                 material_AmbAndDif[index]-=0.01;
             break;
 
@@ -378,7 +378,7 @@ void makeMenu(void){
 
 }
 
-/* Main function
+/* Main function */
 int main(int argc, char **argv){
 
     int window_width = 800;
