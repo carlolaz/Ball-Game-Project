@@ -279,11 +279,11 @@ void keyInput(unsigned char key, int x, int y)
             exit(0);
             break;
         case '1':
-            for(index=0; index < 4; index++)
+            for(index=0; index < 3; index++)
                 material_Spec[index]+=0.01;
             break;
         case '2':
-            for(index=0; index < 4; index++)
+            for(index=0; index < 3; index++)
                 material_Spec[index]-=0.01;;
             break;
         case '3':
@@ -293,11 +293,11 @@ void keyInput(unsigned char key, int x, int y)
             material_Shininess[1]-=0.1f;
             break;
         case '5':
-            for(index=0; index < 4; index++)
+            for(index=0; index < 3; index++)
                 material_AmbAndDif[index]+=0.01;
             break;
         case '6':
-            for(index=0; index < 4; index++)
+            for(index=0; index < 3; index++)
                 material_AmbAndDif[index]-=0.01;
             break;
         case '+':
