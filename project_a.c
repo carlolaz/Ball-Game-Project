@@ -274,8 +274,6 @@ void keyInput(unsigned char key, int x, int y)
     int index=0;
     switch(key) {
         case 27:
-            /*  ESC */
-
             exit(0);
             break;
         case '1':
